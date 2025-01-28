@@ -2,11 +2,14 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 
+time_playing = int(input("How many seconds your bot has to play? "))
+
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("detach", True)
 
 driver = webdriver.Chrome(options=chrome_options)
 driver.get("https://orteil.dashnet.org/experiments/cookie/")
+
 
 def check_prices():
     money = int(driver.find_element(By.ID, value="money").text.replace(",", ""))
@@ -63,8 +66,13 @@ def check_prices():
 
 clicker = driver.find_element(By.ID, value="cookie")
 
-while True:
+game = True
+
+start_time = time.time()
+
+while game:
     clicker.click()
     if int(time.time()) % 5 == 0:
         check_prices()
-
+    if time.time() - start_time > time_playing:
+        break
