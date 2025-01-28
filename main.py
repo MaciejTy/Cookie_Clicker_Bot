@@ -9,7 +9,7 @@ driver = webdriver.Chrome(options=chrome_options)
 driver.get("https://orteil.dashnet.org/experiments/cookie/")
 
 def check_prices():
-    money = float(driver.find_element(By.ID, value="money").text.replace(",", ""))
+    money = int(driver.find_element(By.ID, value="money").text.replace(",", ""))
 
     time_machine = driver.find_element(By.ID, value="buyTime machine").text.split()
     time_machine_price = int((time_machine[3]).replace(",", ""))
